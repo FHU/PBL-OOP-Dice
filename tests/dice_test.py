@@ -1,16 +1,16 @@
-from pytest import mark
 import pytest
+from pytest import mark
 
 import dice
 
 
-def test_Die_instance_attributes():
+def test_die_instance_attributes():
     die = dice.Die()
     assert isinstance(die.value, int)
     assert isinstance(die.faces, int)
 
 
-def test_Die_init():
+def test_die_init():
     die = dice.Die(20)
     die2 = dice.Die()
     assert die.faces == 20
@@ -19,7 +19,7 @@ def test_Die_init():
 
 
 @mark.parametrize("faces", [1, 2, 3, 4, 5, 6, 7, 8, 9, 20, 100, 1000])
-def test_Die_roll_rng(faces):
+def test_die_roll_rng(faces):
     die = dice.Die(faces)
     for _ in range(10):
         roll = die.roll()
@@ -27,7 +27,7 @@ def test_Die_roll_rng(faces):
 
 
 @mark.parametrize("faces", [1, 2, 3, 4, 5, 6, 7, 8, 9, 20, 100, 1000])
-def test_Die_roll_update_value(faces):
+def test_die_roll_update_value(faces):
     die = dice.Die(faces)
     roll = die.roll()
     assert roll == die.value
@@ -36,14 +36,14 @@ def test_Die_roll_update_value(faces):
 @mark.parametrize(
     "face, value", [(1, 1), (2, 2), (3, 2), (20, 7), (100, 82), (1000, 9)]
 )
-def test_Die_str(face, value):
+def test_die_str(face, value):
     die = dice.Die()
     die.faces = face
     die.value = value
     assert str(die) == f"[d{face}] {value}"
 
 
-def test_DiceSet_instance_attribute_blank():
+def test_diceSet_instance_attribute_blank():
     dice_set = dice.DiceSet()
     assert dice_set.dice == []
 
@@ -51,7 +51,7 @@ def test_DiceSet_instance_attribute_blank():
 @mark.parametrize(
     "set", [[4], [5, 6], [3, 2, 9], [20, 7, 100, 20], [82, 25, 16, 6, 6, 6, 6, 6, 6]]
 )
-def test_DiceSet_instance_attribute_with_param(set):
+def test_diceSet_instance_attribute_with_param(set):
     dice_set = dice.DiceSet(set)
     for i in range(len(set)):  # range(len(set))
         assert isinstance(dice_set.dice[i], dice.Die)
@@ -66,7 +66,7 @@ def test_DiceSet_instance_attribute_with_param(set):
         ([20, 7, 100, 20], [18, 4, 42, 8]),
     ],
 )
-def test_DiceSet_pop_die(faces, values):
+def test_diceSet_pop_die(faces, values):
     dice_set = dice.DiceSet(faces)
     for index, value in enumerate(values):
         dice_set.dice[index].value = value
@@ -75,7 +75,7 @@ def test_DiceSet_pop_die(faces, values):
         assert die.value == value
 
 
-def test_DiceSet_pop_die_error():
+def test_diceset_pop_die_error():
     dice_set = dice.DiceSet()
     with pytest.raises(AttributeError):
         dice_set.pop_die(4)
@@ -85,7 +85,7 @@ def test_DiceSet_pop_die_error():
     "test_dice_set",
     [[4], [5, 6], [3, 2, 9], [20, 7, 100, 20], [82, 25, 16, 6, 6, 6, 6, 6, 6]],
 )
-def test_DiceSet_add_die(test_dice_set):
+def test_diceset_add_die(test_dice_set):
     dice_set = dice.DiceSet()
     for face in test_dice_set:
         dice_set.add_die(dice.Die(face))
@@ -96,7 +96,7 @@ def test_DiceSet_add_die(test_dice_set):
 @mark.parametrize(
     "set", [[4], [5, 6], [3, 2, 9], [20, 7, 100, 20], [82, 25, 16, 6, 6, 6, 6, 6, 6]]
 )
-def test_DiceSet_roll(set):
+def test_diceset_roll(set):
     calc_sum = 0
     dice_set = dice.DiceSet(set)
     sum = dice_set.roll()
@@ -106,7 +106,7 @@ def test_DiceSet_roll(set):
     assert sum == calc_sum
 
 
-def test_DiceSet_die_values():
+def test_diceset_die_values():
     dice_set = dice.DiceSet([6, 6, 6, 6])
     dice_set.dice[0].value = 1
     dice_set.dice[1].value = 2
@@ -127,7 +127,7 @@ def test_DiceSet_die_values():
         ([20, 7, 100, 20], [18, 4, 42, 8], "{[d20] 18, [d7] 4, [d100] 42, [d20] 8}"),
     ],
 )
-def test_DiceSet_str(faces, values, dice_str):
+def test_diceset_str(faces, values, dice_str):
     dice_set = dice.DiceSet(faces)
     for index, value in enumerate(values):
         dice_set.dice[index].value = value
