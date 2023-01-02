@@ -100,7 +100,7 @@ jobs:
       - name: Python Documentation Coverage Check (interrogate)
         if: success() || failure()
         run: |
-          interrogate .
+          interrogate . -e tests -e conftest.py -e docs
 
 
   build_docs:
@@ -139,7 +139,7 @@ jobs:
       - name: Generate report and badge for documentation coverage
         continue-on-error: true
         run: |
-          interrogate . -vv -o docs/_static/doc_coverage.txt -g docs/_static/doc_coverage_badge.svg
+          interrogate . -vv -o docs/_static/doc_coverage.txt -g docs/_static/doc_coverage_badge.svg -e tests -e conftest.py -e docs
       - name: Generate autodoc files with napoleon
         run: |
           # Make .rst files from Google docstrings
