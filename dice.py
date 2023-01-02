@@ -1,6 +1,7 @@
 class Die:
-  def __init__(self):
-    pass
-  
+    def __init__(self):
+        pass
+
+
 class DiceSet:
-  pass
+    pass
