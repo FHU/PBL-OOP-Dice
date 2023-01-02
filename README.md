@@ -1,6 +1,6 @@
 # OOP Dice
 
-Using the definitions below, write two classes to use with your D&D friends!
+Using the definitions below, write two classes to use with your D&D friends! When complete, this program will allow us to import this module and use the classes to arrange any combination of dice into sets that we can roll as a set.
 
 
 ## Die
