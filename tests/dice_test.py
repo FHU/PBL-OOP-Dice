@@ -43,7 +43,7 @@ def test_die_str(face, value):
     assert str(die) == f"[d{face}] {value}"
 
 
-def test_diceSet_instance_attribute_blank():
+def test_diceset_instance_attribute_blank():
     dice_set = dice.DiceSet()
     assert dice_set.dice == []
 
@@ -51,7 +51,7 @@ def test_diceSet_instance_attribute_blank():
 @mark.parametrize(
     "set", [[4], [5, 6], [3, 2, 9], [20, 7, 100, 20], [82, 25, 16, 6, 6, 6, 6, 6, 6]]
 )
-def test_diceSet_instance_attribute_with_param(set):
+def test_diceset_instance_attribute_with_param(set):
     dice_set = dice.DiceSet(set)
     for i in range(len(set)):  # range(len(set))
         assert isinstance(dice_set.dice[i], dice.Die)
@@ -66,7 +66,7 @@ def test_diceSet_instance_attribute_with_param(set):
         ([20, 7, 100, 20], [18, 4, 42, 8]),
     ],
 )
-def test_diceSet_pop_die(faces, values):
+def test_diceset_pop_die(faces, values):
     dice_set = dice.DiceSet(faces)
     for index, value in enumerate(values):
         dice_set.dice[index].value = value
