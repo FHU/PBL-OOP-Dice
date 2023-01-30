@@ -16,7 +16,7 @@ Methods
  - `__init__(self, faces=6)`
    - Constructor. `faces` defaults to 6 and `value` defaults to 0.
  - `roll(self)`
-   - returns a random number between 1 and numSides (inclusive)
+   - returns a random number between 1 and faces (inclusive)
  - `__str__(self)`
    - returns the string version of a die;
       Example: "[d6] 3" where 6 is the number of sides and 3 is the value.
